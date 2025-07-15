@@ -34,8 +34,45 @@ Build a Raspberry Pi 3B-based LoRa communication device that functions like a "p
   ```
 - [ ] **0.5** Create project directory structure
 - [ ] **0.6** Install RadioHead library
-- [ ] **0.7** Test basic LoRa HAT connectivity
 
+#### Linux Installation:
+```bash
+# Clone the RadioHead repository
+cd ~
+git clone https://github.com/PaulStoffregen/RadioHead.git
+
+# Option A: System-wide install (headers only)
+sudo cp -r RadioHead/*.h /usr/local/include/
+sudo cp -r RadioHead/*.cpp /usr/local/include/
+# RadioHead is header-only but includes .cpp files that need to be accessible
+
+# Option B: Per-project include (recommended)
+# In your project's CMakeLists.txt, add:
+#   include_directories("${HOME}/RadioHead")
+# Or copy RadioHead folder to your project:
+#   cp -r ~/RadioHead ./libs/
+```
+
+#### Windows Installation:
+```cmd
+# Using Command Prompt or PowerShell
+cd %USERPROFILE%
+git clone https://github.com/PaulStoffregen/RadioHead.git
+
+# Option A: Copy to project directory (recommended)
+# Copy the RadioHead folder to your project's libs directory
+# xcopy RadioHead "C:\path\to\your\project\libs\RadioHead" /E /I
+
+# Option B: System-wide with MinGW/MSYS2
+# Copy RadioHead contents to your toolchain's include directory
+# copy RadioHead\*.h C:\msys64\mingw64\include\
+# copy RadioHead\*.cpp C:\msys64\mingw64\include\
+
+# In CMakeLists.txt for Windows:
+#   include_directories("${CMAKE_SOURCE_DIR}/libs/RadioHead")
+#   or
+#   include_directories("$ENV{USERPROFILE}/RadioHead")
+```
 ## Project Structure
 ```
 lora_phone/
